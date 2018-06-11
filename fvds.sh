@@ -9,4 +9,15 @@ if [ "$(grep -Ei 'debian|buntu|mint' /etc/*release)" ]; then
 		fstrim $mount;
 	done
 	echo "All done!"
+elif [ "$(grep -Ei 'fedora|redhat|rhel' /etc/*release)" ]; then
+	echo "Cleaning YUM/DNF packages"
+	yum clean all
+	sleep 2
+	dnf clean all
+	echo "Done cleaning YUM/DNF packages"
+	echo "Performing TRIM operations"
+	for mount in / /boot /home /swap; do
+		fstrim $mount;
+	done
+	echo "All done!"
 fi
