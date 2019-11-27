@@ -4,6 +4,8 @@ if [ "$(grep -Ei 'debian|buntu|mint' /etc/*release)" ]; then
 	apt clean
 	sleep 2
 	echo "Done cleaning APT packages"
+	echo "Cleaning ~/.cache and ~/.local"
+	rm -rf ~/.cache ~/.local 
 	echo "Performing TRIM operations"
 	for mount in / /boot /home /swap; do
 		fstrim $mount;
